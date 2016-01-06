@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e5e5e5;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.login-form {
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 400px;
+    border: 2px solid #d5b5a5;
+    margin: 0 auto 20px;
+    padding: 10px 25px 25px;
+}
+
+p {
+    font-family: sans-serif;
+}
+
+.employees-wrapper {
+    background-color: #fff;
+    max-width: 800px;
+    margin: 0 auto 20px;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 10px;
+    background: #fff; 
+}
+
+.container h1, h3 {
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+
+p.summary {
+    text-indent: 3%;
+}
+
+p,.show-exemptionDescription {
+    color: #0075A8;
+    font-family: arial, helvetica, sans-serif;
+    letter-spacing: .5px;
+    line-height: 18px;
+}
+
+div.show-exemptedGroup {
+    min-height: 75px;
+    width: 100%;
+    margin: 2% 0 0 0;
+}
+
+.show-exemptedPlayers {
+    color: maroon;
+    font-family: arial, helvetica;
+}
+
+.btn-submit {
+    margin: 2% 0 0 0;
+    background: #0075a8;
+    border-radius: 5px;
+    min-width: 15%;
+    min-height: 40px;
+    box-shadow: 3px 3px 1px #85817e;
+    color: white;
+    font: 14px helvetica;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.formWrapper {
+    float: left;
+    max-width: 50%;
+    padding: 2% 10% 2% 5%;
+}
+
+.teamForm {
+    float: left;
+    clear: both;
+    max-width: 50%;
+
+}
+
+.formButtons {
+    float: left;
+    clear: both;
+    margin: 20px 20px 0 0;
+}
+
+.getTeamButton {
+    float: left;
+    clear: right;
+}
+
+.enterPlayer {
+    margin: 0 0 10px 30px;
+    
+}
+
+.playerList {
+    clear: right;
+    float: right;
+    margin: 3px;
+
+}
+
+.playerButtons {
+    float: right;
+    margin-left: 15px;
+}
+
+.playerWrapper {
+    float: right;
+    max-width: 40%;
+    min-height: 300px;
+    margin: 3% 3% 0 0;
+}
+
+.formDescription {
+    font-size: 16px;
+    margin: 1% 0 2% 0;
+}
+
+.addPlayerInput {
+    max-width: 54%;
+    margin: 30px 0;
+}
+
+input[name="player"] {
+    width: 70%;
+}
+
+.rosteredPlayers {
+    margin: 0 0 15px 0;
+}

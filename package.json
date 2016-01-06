@@ -1,0 +1,11 @@
+{
+    "name" : "showExemptionApp",
+    "version" : "0.0.1",
+    "private" : true,
+    "description" : "App to exempt players while playing MLB The Show",
+    "main" : "server.js",
+    "author" : "dandersh",
+    "dependencies" : {
+	"express" : "3.4.0"
+    }
+}
