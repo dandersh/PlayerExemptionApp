@@ -6,7 +6,6 @@ angular.module('theShowApp', ['theShowApp.common'])
         vm.paternity = [];
         vm.bereavement = [];
 
-
         vm.runExemptedPlayers = function() {
             return playerModel.runExemptedPlayers(vm.rosteredPlayers, vm.paternity, vm.bereavement);
         };
@@ -41,6 +40,7 @@ angular.module('theShowApp', ['theShowApp.common'])
 
 
     }).controller('teamCtrl', function ($scope, $http) {
+
 
         $scope.chosenTeam = [];
 
