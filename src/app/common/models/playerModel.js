@@ -1,11 +1,11 @@
 angular.module('theShowApp.common')
-    .service('playerModel', function($http) {
+    .service('playerModel', function($http, $rootScope) {
         var service = this,
             rosteredPlayers,
             bereavementList = [],
             paternityList = [],
             url = 'https://api.mongolab.com/api/1/databases/theshowapp/collections/teams',
-            apiKey = '####';
+            apiKey =  '####';
 
         service.sortNames = function (x, y) {
             if (x.name < y.name) {
@@ -145,10 +145,11 @@ angular.module('theShowApp.common')
             };
 
             var getUrl = url + '?q=' + JSON.stringify(params) + '&fo=true&apiKey=' + apiKey;
-            $http.get(getUrl).success(function (data, status, headers, config) {
+            return $http.get(getUrl).success(function (data, status, headers, config) {
                 service.setRosteredPlayers(vm, data);
             }).error(function (data, status, headers, config) {
-                console.log('failed');
+                console.log('error');
             });
+
         };
     });
