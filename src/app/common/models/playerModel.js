@@ -101,14 +101,16 @@ angular.module('theShowApp.common')
                 '_id': vm._id,
                 'players': allPlayers
             };
-            $http.put(url + "?apiKey=" + apiKey, configObj).success(function (data, status, headers, config) {
-                console.log('submitted');
-            }).error(function (data, status, headers, config) {
-                console.log('error');
+            return $http.put(url + "?apiKey=" + apiKey, configObj).then(function (data, status, headers, config) {
+                if (data.status === 200) {
+                    // falls through to controller where the promise is resolved
+                } else {
+                    throw new Error();
+                }
             });
         };
 
-        service.add = function(userName, vm) {
+        service.add = function(vm) {
             var allPlayers = [];
             allPlayers.push(vm.rosteredPlayers);
             allPlayers.push(vm.paternity);
@@ -119,11 +121,14 @@ angular.module('theShowApp.common')
                 '_id': vm._id,
                 'players': allPlayers
             };
-            $http.put(url + "?apiKey=" + apiKey, configObj).success(function (data, status, headers, config) {
-                console.log('submitted');
-            }).error(function (data, status, headers, config) {
-                console.log('error');
+            return $http.put(url + "?apiKey=" + apiKey, configObj).then(function (data, status, headers, config) {
+                if (data.status === 200) {
+                     // falls through to controller where the promise is resolved
+                } else {
+                    throw new Error();
+                }
             });
+
         };
 
         service.get = function(userName, vm) {
@@ -139,17 +144,24 @@ angular.module('theShowApp.common')
                     ]
                 };
                 service.setRosteredPlayers(vm, testerData)
+            } else {
+                var params = {
+                    "username": username
+                };
+                var getUrl = url + '?q=' + JSON.stringify(params) + '&fo=true&apiKey=' + apiKey;
+                return $http({
+                    method: 'get',
+                    url: getUrl
+                }).then(function (response) {
+                    if (response.data !== null) {
+                        service.setRosteredPlayers(vm, response.data);
+                    } else {
+                        throw new Error();
+                    }
+                });
             }
-            var params = {
-                "username": username
-            };
 
-            var getUrl = url + '?q=' + JSON.stringify(params) + '&fo=true&apiKey=' + apiKey;
-            return $http.get(getUrl).success(function (data, status, headers, config) {
-                service.setRosteredPlayers(vm, data);
-            }).error(function (data, status, headers, config) {
-                console.log('error');
-            });
+
 
         };
     });

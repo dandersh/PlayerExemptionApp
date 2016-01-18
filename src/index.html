@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="src/assets/css/bootstrap-3.3.5.css" rel="stylesheet" type="text/css">
     <link href="src/assets/css/theShow.css" rel="stylesheet" type="text/css">
+    <link href="src/assets/css/toastr.css" rel="stylesheet" type="text/css" >
     <title>Show Exemption App</title>
 
 </head>
@@ -55,12 +56,15 @@
             </div>
 
             <button type="submit" class="btn btn-primary btn-md" ng-click="vm.runExemptedPlayers()">Run Program</button>
-            <button class="btn btn-success btn-md submitButton saveTeam" ng-disabled="true" ng-click="vm.submitTeam()"> Save Team</button>
+            <button class="btn btn-success btn-md submitButton saveTeam" ng-click="vm.submitTeam()" ng-disabled="true"> Save Team</button>
 
         </section>
     </div>
 </div>
 
+
+<script src="vendor/jquery-2.1.4.js"></script>
+<script src="vendor/toastr.js"></script>
 <script src="vendor/angular-1.4.8.js"></script>
 <script src="src/vendor/ramda-0.19.0.js"></script>
 <script src="src/vendor/lodash-3.10.1.js"></script>

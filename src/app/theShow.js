@@ -6,6 +6,14 @@ angular.module('theShowApp', ['theShowApp.common'])
         vm.paternity = [];
         vm.bereavement = [];
 
+        vm.successResponse = function() {
+            toastr.success('Your request was successful', 'GOOD JOBBBBBB');
+        };
+
+        vm.failedResponse = function() {
+            toastr.error('Your request was unsuccessful', 'SUBMIT');
+        };
+
         vm.runExemptedPlayers = function() {
             return playerModel.runExemptedPlayers(vm.rosteredPlayers, vm.paternity, vm.bereavement);
         };
@@ -18,15 +26,27 @@ angular.module('theShowApp', ['theShowApp.common'])
         var userName = vm.username;
 
         vm.getTeam = function() {
-            return playerModel.get(userName, vm);
+             return playerModel.get(userName, vm).then(function(data) {
+                 vm.successResponse();
+            }).catch(function(err) {
+                 vm.failedResponse();
+            });
         };
 
         vm.addTeam = function() {
-            return playerModel.add(userName, vm);
+            return playerModel.add(vm).then(function() {
+                vm.successResponse();
+            }).catch(function(err) {
+                vm.failedResponse();
+            })
         };
 
         vm.submitTeam = function() {
-            return playerModel.submit(vm);
+            return playerModel.submit(vm).then(function() {
+                vm.successResponse();
+            }).catch(function(err) {
+                vm.failedResponse();
+            })
         };
 
     }).controller('editPlayer', function(playerModel, $scope, $http) {
