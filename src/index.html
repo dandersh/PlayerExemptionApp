@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link href="src/assets/css/bootstrap-3.3.5.css" rel="stylesheet" type="text/css">
+    <link href="src/assets/css/Bootstrap-3.3.4.min.css" rel="stylesheet" type="text/css">
     <link href="src/assets/css/theShow.css" rel="stylesheet" type="text/css">
-    <link href="src/assets/css/toastr.css" rel="stylesheet" type="text/css" >
+    <link href="src/assets/css/toastr-2.0.1.css" rel="stylesheet" type="text/css">
     <title>Show Exemption App</title>
 
 </head>
@@ -13,20 +13,20 @@
 <div>
     <div class="container">
         <header ng-include=" 'assets/partials/header.html' "></header>
-        <section id="show-main" ng-controller="playerCtrl as vm">
+        <section id="show-main" ng-controller="PlayerController as pc">
             <h3>Generate Players</h3>
             <p class="summary">Enter your username in the field and click the "Get Team" button to generate your players. Enter "tester" to generate a previously configured
-            team for you to experiment with.</p>
+                team for you to experiment with.</p>
             <form name="getPlayers" class="getPlayersForm" novalidate>
                 <div class="input-group addPlayerInput">
-                    <input class="form-control" type="text" name="username" ng-model="vm.username" placeholder="Username..." class="teamForm" required autofocus />
+                    <input class="form-control" type="text" name="username" ng-model="pc.username" placeholder="Username..." class="teamForm" required autofocus />
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="vm.getTeam()">Get Team</button>
-                            <button class="btn btn-default" type="button" ng-click="vm.addTeam()" ng-disabled="true">Add Team</button>
+                            <button class="btn btn-default" type="button" ng-click="pc.getTeam()">Get Team</button>
+                            <button class="btn btn-default" type="button" ng-click="pc.addTeam()" ng-disabled="!pc.username">Add Team</button>
                         </span>
                 </div>
             </form>
-            <div ng-controller="editPlayer as ep" class="addPlayerInput">
+            <div ng-controller="EditPlayerController as ep" class="addPlayerInput">
                 <div class="input-group">
                     <input class="form-control" type="text" name="player" ng-disabled="ep.chosenTeam.length > 24" ng-model="ep.player" placeholder="Add player(s) here" class="teamForm" required />
                         <span class="input-group-btn">
@@ -44,33 +44,37 @@
             </div>
 
             <p class="rosteredPlayers">Roster Players (click to remove):</p>
-            <span id="show-playerDisplay"  class="show-exemptedPlayers" ng-click="vm.removePlayer(player)" ng-repeat="player in vm.rosteredPlayers"> {{ player}}, </span>
-            <display-players players="vm.rosteredPlayers">{{player}}</display-players>
+            <span id="show-playerDisplay"  class="show-exemptedPlayers" ng-click="pc.removePlayer(player)" ng-repeat="player in pc.rosteredPlayers"> {{ player}}, </span>
+            <display-players players="pc.rosteredPlayers">{{player}}</display-players>
             <div class="show-exemptedGroup">
-                <span class="show-exemptionDescription">Players currently on bereavement list (days remaining):</span><br> <span ng-repeat="player in vm.bereavement" class="show-exemptedPlayers"> {{ player.name }} ({{player.days}})  </span><p class= "show-exemptedPlayers" ng-show="exemptedPlayers.bereavement.length === 0"> No Players </p>
+                <span class="show-exemptionDescription">Players currently on bereavement list (days remaining):</span><br> <span ng-repeat="player in pc.bereavement" class="show-exemptedPlayers"> {{ player.name }} ({{player.days}})  </span><p class= "show-exemptedPlayers" ng-show="exemptedPlayers.bereavement.length === 0"> No Players </p>
                 <p class ="show-exemptedPlayers"> </p>
             </div>
             <div class="show-exemptedGroup">
-                <span class="show-exemptionDescription">Players currently on paternity leave (days remaining):</span><br> <span ng-repeat="player in vm.paternity" class="show-exemptedPlayers"> {{ player.name }} ({{player.days}})  </span><p class = "show-exemptedPlayers" ng-show="exemptedPlayers.paternity.length === 0"> No Players </p>
+                <span class="show-exemptionDescription">Players currently on paternity leave (days remaining):</span><br> <span ng-repeat="player in pc.paternity" class="show-exemptedPlayers"> {{ player.name }} ({{player.days}})  </span><p class = "show-exemptedPlayers" ng-show="exemptedPlayers.paternity.length === 0"> No Players </p>
                 <p class ="show-exemptedPlayers"> </p>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-md" ng-click="vm.runExemptedPlayers()">Run Program</button>
-            <button class="btn btn-success btn-md submitButton saveTeam" ng-click="vm.submitTeam()" ng-disabled="true"> Save Team</button>
+            <button type="submit" class="btn btn-primary btn-md" ng-click="pc.runExemptedPlayers()">Run Program</button>
+            <button class="btn btn-success btn-md submitButton saveTeam" ng-disabled="pc.chosenTeam.length > 24 || !pc.username" ng-click="pc.submitTeam()"> Save Team</button>
 
         </section>
     </div>
 </div>
 
-
-<script src="vendor/jquery-2.1.4.js"></script>
-<script src="vendor/toastr.js"></script>
-<script src="vendor/angular-1.4.8.js"></script>
+<script src="src/vendor/jquery-2.1.4.js"></script>
+<script src="src/vendor/angular-1.4.8.js"></script>
+<script src="src/vendor/toastr-2.0.1.js"></script>
 <script src="src/vendor/ramda-0.19.0.js"></script>
 <script src="src/vendor/lodash-3.10.1.js"></script>
-<script src="app/common/common.js"></script>
-<script src="app/common/models/playerModel.js"></script>
 <script src="src/app/theShow.js"></script>
+<script src="src/app/Players/Player.module.js"></script>
+<script src="src/app/Players/Player.controller.js"></script>
+<script src="src/app/Players/Player.service.js"></script>
+<script src="src/app/Players/Player.factory.js"></script>
+<script src="src/app/Edit/EditPlayer.module.js"></script>
+<script src="src/app/Edit/EditPlayer.service.js"></script>
+<script src="src/app/Edit/EditPlayer.controller.js"></script>
 
 </body>
 
